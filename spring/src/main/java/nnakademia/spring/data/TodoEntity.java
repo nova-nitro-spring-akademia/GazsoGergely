@@ -1,4 +1,4 @@
-package nnakademia.spring.todo.data;
+package nnakademia.spring.data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
