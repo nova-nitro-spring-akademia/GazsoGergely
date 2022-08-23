@@ -1,7 +1,5 @@
 package nnakademia.spring.user.data;
 
-import nnakademia.spring.data.TodoEntity;
-
 import javax.persistence.*;
 import java.util.List;
 
