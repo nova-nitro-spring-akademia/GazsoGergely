@@ -8,7 +8,7 @@ RECEPTKÖNYV
 	-Tápanyag (gramms field, calcCalories metódus)
 	-Szénhidrát, Zsír, Fehérje (gramms field, calcCalories-t override-olja)
 
-Felvételhez inkább 3-4 kü űrlap.
+Felvételhez inkább 3-4 kül űrlap.
 
 
 View réteg******************************************************************
