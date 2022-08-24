@@ -5,7 +5,6 @@ import nnakademia.spring.mapper.AllergenicDTOMapper;
 import nnakademia.spring.service.AllergenicService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/api/allergens")
@@ -21,9 +20,10 @@ public class AllergenicRestController {
     }
 
     @PostMapping
-    public Allergenic postAllergenic(@RequestBody AllergenicDTO allergenicDTO){
+    public AllergenicDTO postAllergenic(@RequestBody AllergenicDTO allergenicDTO){
         Allergenic allergenic = allergenicDTOMapper.fromAllergenicDTO(allergenicDTO);
-        Allergenic allergenicSaved = allergenicService.sa
+        Allergenic allergenicSaved = allergenicService.save(allergenic);
+        return allergenicDTOMapper.toAllergenicDTO(allergenicSaved);
     }
 
 }
