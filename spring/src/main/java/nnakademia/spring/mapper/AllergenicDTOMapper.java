@@ -18,7 +18,7 @@ public class AllergenicDTOMapper {
 
     public Allergenic fromAllergenicDTO(AllergenicDTO allergenicDTO){
         Allergenic allergenic = new Allergenic();
-        allergenic.setName(allergenicDTO.getName());
+        allergenic.setName(allergenicDTO.getName().toLowerCase());
         allergenic.setEffect(allergenicDTO.getEffect());
         return allergenic;
     }

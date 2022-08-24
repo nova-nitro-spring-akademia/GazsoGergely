@@ -43,7 +43,8 @@ public class AllergenicService {
     }
 
     public Allergenic deleteById(String name) {
-        Allergenic allergenic = findById(name);
-
+        Allergenic deletedAllergenic = findById(name);
+        allergenicRepository.deleteById(name);
+        return deletedAllergenic;
     }
 }

@@ -42,9 +42,9 @@ public class AllergenicRestController {
     }
 
     @DeleteMapping("/{name}")
-    public DeleteMapping deleteAllergen(@PathVariable String name){
+    public AllergenicDTO deleteAllergen(@PathVariable String name){
         name = name.toLowerCase();
-        Allergenic allergenic = allergenicService.deleteById(name);
+        return allergenicDTOMapper.toAllergenicDTO(allergenicService.deleteById(name));
     }
 
 }
