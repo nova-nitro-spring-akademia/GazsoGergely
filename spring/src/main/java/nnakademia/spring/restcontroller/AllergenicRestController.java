@@ -1,12 +1,9 @@
 package nnakademia.spring.restcontroller;
 
-import nnakademia.spring.domain.Allergenic;
+import nnakademia.spring.domain.*;
 import nnakademia.spring.mapper.AllergenicDTOMapper;
 import nnakademia.spring.service.AllergenicService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/allergens")
@@ -26,6 +23,18 @@ public class AllergenicRestController {
         Allergenic allergenic = allergenicDTOMapper.fromAllergenicDTO(allergenicDTO);
         Allergenic allergenicSaved = allergenicService.save(allergenic);
         return allergenicDTOMapper.toAllergenicDTO(allergenicSaved);
+    }
+
+    @GetMapping("/getsamplerecipe")
+    public Recipe getSampleRecipe(){
+        Carbohydrate carbohydrate = new Carbohydrate();
+        Ingredient ingredient = new Ingredient();
+        Allergenic allergenic = new Allergenic();
+        Food food = new Food();
+
+        Recipe recipe = new Recipe(new Long(1), food, "ask your Mom for instructions");
+
+        return null;
     }
 
 }
