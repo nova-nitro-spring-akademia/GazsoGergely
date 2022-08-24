@@ -5,9 +5,11 @@ import nnakademia.spring.mapper.AllergenicDTOMapper;
 import nnakademia.spring.service.AllergenicService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/api/allergens")
+@RestController
+@RequestMapping("/api/allergens")
 public class AllergenicRestController {
 
     AllergenicService allergenicService;
