@@ -4,7 +4,11 @@ import nnakademia.spring.data.AllergenicEntity;
 import nnakademia.spring.data.AllergenicRepository;
 import nnakademia.spring.domain.Allergenic;
 import nnakademia.spring.mapper.AllergenicEntityMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @Service
 public class AllergenicService {
@@ -22,5 +26,24 @@ public class AllergenicService {
         AllergenicEntity allergenicEntity = allergenicEntityMapper.toAllergenicEntity(allergenic);
         AllergenicEntity savedEntity = allergenicRepository.save(allergenicEntity);
         return allergenicEntityMapper.fromAllergenicEntity(savedEntity);
+    }
+
+    public Allergenic findById(String name) {
+        AllergenicEntity allergenicEntity = allergenicRepository
+                .findById(name)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+                );
+        return  allergenicEntityMapper.fromAllergenicEntity(allergenicEntity);
+    }
+
+    public List<Allergenic> findAll() {
+        List<AllergenicEntity> allergenicEntities =  allergenicRepository
+                .findAll();
+        return allergenicEntityMapper.fromAllergenicEntityList(allergenicEntities);
+    }
+
+    public Allergenic deleteById(String name) {
+        Allergenic allergenic = findById(name);
+
     }
 }

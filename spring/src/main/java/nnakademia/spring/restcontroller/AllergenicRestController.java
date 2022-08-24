@@ -1,9 +1,12 @@
 package nnakademia.spring.restcontroller;
 
+import nnakademia.spring.data.AllergenicEntity;
 import nnakademia.spring.domain.*;
 import nnakademia.spring.mapper.AllergenicDTOMapper;
 import nnakademia.spring.service.AllergenicService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/allergens")
@@ -25,16 +28,23 @@ public class AllergenicRestController {
         return allergenicDTOMapper.toAllergenicDTO(allergenicSaved);
     }
 
-    @GetMapping("/getsamplerecipe")
-    public Recipe getSampleRecipe(){
-        Carbohydrate carbohydrate = new Carbohydrate();
-        Ingredient ingredient = new Ingredient();
-        Allergenic allergenic = new Allergenic();
-        Food food = new Food();
+    @GetMapping("/{name}")
+    public AllergenicDTO getAllergenic(@PathVariable String name){
+        name = name.toLowerCase();
+        Allergenic allergenic = allergenicService.findById(name);
+        return allergenicDTOMapper.toAllergenicDTO(allergenic);
+    }
 
-        Recipe recipe = new Recipe(new Long(1), food, "ask your Mom for instructions");
+    @GetMapping
+    public List<AllergenicDTO> getAllAllergens(){
+        List<Allergenic> allergens = allergenicService.findAll();
+        return allergenicDTOMapper.toAllergenicDTOList(allergens);
+    }
 
-        return null;
+    @DeleteMapping("/{name}")
+    public DeleteMapping deleteAllergen(@PathVariable String name){
+        name = name.toLowerCase();
+        Allergenic allergenic = allergenicService.deleteById(name);
     }
 
 }
