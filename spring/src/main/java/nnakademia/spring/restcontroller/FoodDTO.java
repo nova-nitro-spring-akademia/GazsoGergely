@@ -1,8 +1,11 @@
-package nnakademia.spring.domain;
+package nnakademia.spring.restcontroller;
+
+import nnakademia.spring.domain.Allergenic;
+import nnakademia.spring.domain.Ingredient;
 
 import java.util.List;
 
-public class Food {
+public class FoodDTO {
 
     Long id;
 
@@ -12,14 +15,20 @@ public class Food {
 
     List<Allergenic> allergens;
 
-
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Ingredient> getIngredients() {
@@ -38,11 +47,5 @@ public class Food {
         this.allergens = allergens;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }

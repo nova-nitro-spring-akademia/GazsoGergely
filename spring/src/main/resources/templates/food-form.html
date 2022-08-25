@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>FOOD FORM</title>
+</head>
+<body>
+<h1>FOOD FORM</h1>
+<form action="#" th:action="@{/addfoodform}" th:object="${foodProperties}" method="POST">
+  <table border="2">
+    <tr>
+<!--      <td><input type="number" th:field="${foodProperties.numOfALlergens}"></td>-->
+      <td><input type="number" th:field="*{numOfIngredients}"></td>
+        <td><input type="number" th:field="*{numOfAllergens}"></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
