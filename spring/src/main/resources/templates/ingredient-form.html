@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ALLERGENIC FORM</title>
+</head>
+<body>
+<h1>ALLERGENIC FORM</h1>
+<form action="#" th:action="@{/saveallergenic}" th:object="${ingredientDTO}" method="POST">
+    <table border="2">
+        <tr>
+            <td><label>Name</label></td>
+            <td><label>Carbohydrate (grams)</label></td>
+            <td><label>Protein (grams)</label></td>
+            <td><label>Fat (grams)</label></td>
+        </tr>
+        <tr>
+            <td><input type="text" th:field="*{name}" placeholder="name"></td>
+            <td><input type="text" th:field="*{effect}" placeholder="effect"></td>
+            <td><button type="submit">save</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

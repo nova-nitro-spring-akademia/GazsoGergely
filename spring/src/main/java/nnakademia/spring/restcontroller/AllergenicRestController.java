@@ -35,6 +35,7 @@ public class AllergenicRestController {
         return allergenicDTOMapper.toAllergenicDTO(allergenic);
     }
 
+
     @GetMapping
     public List<AllergenicDTO> getAllAllergens(){
         List<Allergenic> allergens = allergenicService.findAll();
