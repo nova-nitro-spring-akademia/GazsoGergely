@@ -1,14 +1,26 @@
-package nnakademia.spring.domain;
+package nnakademia.spring.data;
 
-public class Ingredient {
+import nnakademia.spring.domain.Carbohydrate;
+import nnakademia.spring.domain.Fat;
+import nnakademia.spring.domain.Protein;
 
+import javax.persistence.*;
+
+@Entity
+public class IngredientEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String name;
 
+    @Embedded
     Carbohydrate carbohydrate;
 
+    @Embedded
     Protein protein;
 
+    @Embedded
     Fat fat;
 
     public Long getId() {

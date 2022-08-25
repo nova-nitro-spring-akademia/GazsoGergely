@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>ALLERGENIC FORM</h1>
-<form action="#" th:action="@{/saveallergenic}" th:object="${ingredientDTO}" method="POST">
+<form action="#" th:action="@{/saveingredient}" th:object="${ingredientDTO}" method="POST">
     <table border="2">
         <tr>
             <td><label>Name</label></td>
@@ -16,7 +16,9 @@
         </tr>
         <tr>
             <td><input type="text" th:field="*{name}" placeholder="name"></td>
-            <td><input type="text" th:field="*{effect}" placeholder="effect"></td>
+            <td><input type="number" th:field="*{carbohydrate}" placeholder="carbohydrate"></td>
+            <td><input type="number" th:field="*{protein}" placeholder="protein"></td>
+            <td><input type="number" th:field="*{fat}" placeholder="fat"></td>
             <td><button type="submit">save</button></td>
         </tr>
     </table>

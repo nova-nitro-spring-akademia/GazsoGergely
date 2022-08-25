@@ -1,9 +1,11 @@
 package nnakademia.spring.controller;
 
 import nnakademia.spring.mapper.AllergenicDTOMapper;
+import nnakademia.spring.mapper.IngredientDTOMapper;
 import nnakademia.spring.restcontroller.AllergenicDTO;
 import nnakademia.spring.restcontroller.IngredientDTO;
 import nnakademia.spring.service.AllergenicService;
+import nnakademia.spring.service.IngredientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +21,15 @@ public class MainController {
 
     AllergenicService allergenicService;
 
-    public MainController(AllergenicDTOMapper allergenicDTOMapper, AllergenicService allergenicService) {
+    IngredientDTOMapper ingredientDTOMapper;
+
+    IngredientService ingredientService;
+
+    public MainController(AllergenicDTOMapper allergenicDTOMapper, AllergenicService allergenicService, IngredientDTOMapper ingredientDTOMapper, IngredientService ingredientService) {
         this.allergenicDTOMapper = allergenicDTOMapper;
         this.allergenicService = allergenicService;
+        this.ingredientDTOMapper = ingredientDTOMapper;
+        this.ingredientService = ingredientService;
     }
 
     @GetMapping("/home")
@@ -37,7 +45,7 @@ public class MainController {
     }
 
     @PostMapping("/saveallergenic")
-    public String saveEmployee(@ModelAttribute("allergenicDTO") AllergenicDTO allergenicDTO) {
+    public String saveAlergenic(@ModelAttribute("allergenicDTO") AllergenicDTO allergenicDTO) {
         allergenicService.save(allergenicDTOMapper.fromAllergenicDTO(allergenicDTO));
         return "redirect:/home";
     }
@@ -48,5 +56,11 @@ public class MainController {
             model.addAttribute("ingredientDTO", ingredientDTO);
             return "ingredient-form";
         }
+
+    @PostMapping("/saveingredient")
+    public String saveIngredient(@ModelAttribute("ingredientDTO") IngredientDTO ingredientDTO) {
+        ingredientService.save(ingredientDTOMapper.fromIngredientDTO(ingredientDTO));
+        return "redirect:/home";
+    }
 
 }

@@ -1,6 +1,11 @@
 package nnakademia.spring.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.Transient;
+
 public class Protein extends Nutrition{
+    @Transient
     final int kcalsPerGramm=4;
 
     public Protein(int quantity){
