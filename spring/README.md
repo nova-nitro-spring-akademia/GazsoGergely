@@ -66,3 +66,5 @@ OneToOne
 	- egy Ételhez egy Recept tartozhat. Egy Recept az uatsítások field-et fogja az Étel-en kívül tartalmazni.
 Custom repository lekérdezések
 	-kérd le az összes reggelit, amiben nincsen tojás
+
+Validation-re ötlet: utrition 3 értéke az ingredient űrlapon nem lehet null

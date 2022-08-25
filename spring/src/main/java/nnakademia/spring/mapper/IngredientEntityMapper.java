@@ -11,9 +11,7 @@ public class IngredientEntityMapper {
         Ingredient ingredient = new Ingredient();
         ingredient.setId(ingredientEntity.getId());
         ingredient.setName(ingredientEntity.getName());
-        ingredient.setCarbohydrate(ingredientEntity.getCarbohydrate());
-        ingredient.setProtein(ingredientEntity.getProtein());
-        ingredient.setFat(ingredientEntity.getFat());
+        ingredient.setNutrition(ingredientEntity.getNutrition());
         return ingredient;
     }
 
@@ -21,9 +19,7 @@ public class IngredientEntityMapper {
         IngredientEntity ingredientEntity = new IngredientEntity();
         ingredientEntity.setId(ingredient.getId());
         ingredientEntity.setName(ingredient.getName());
-        ingredientEntity.setCarbohydrate(ingredient.getCarbohydrate());
-        ingredientEntity.setProtein(ingredient.getProtein());
-        ingredientEntity.setFat(ingredient.getFat());
+        ingredientEntity.setNutrition(ingredient.getNutrition());
         return ingredientEntity;
     }
 

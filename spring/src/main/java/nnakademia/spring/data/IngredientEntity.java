@@ -1,8 +1,6 @@
 package nnakademia.spring.data;
 
-import nnakademia.spring.domain.Carbohydrate;
-import nnakademia.spring.domain.Fat;
-import nnakademia.spring.domain.Protein;
+import nnakademia.spring.domain.Nutrition;
 
 import javax.persistence.*;
 
@@ -15,13 +13,7 @@ public class IngredientEntity {
     String name;
 
     @Embedded
-    Carbohydrate carbohydrate;
-
-    @Embedded
-    Protein protein;
-
-    @Embedded
-    Fat fat;
+    Nutrition nutrition;
 
     public Long getId() {
         return id;
@@ -39,27 +31,11 @@ public class IngredientEntity {
         this.name = name;
     }
 
-    public Carbohydrate getCarbohydrate() {
-        return carbohydrate;
+    public Nutrition getNutrition() {
+        return nutrition;
     }
 
-    public void setCarbohydrate(Carbohydrate carbohydrate) {
-        this.carbohydrate = carbohydrate;
-    }
-
-    public Protein getProtein() {
-        return protein;
-    }
-
-    public void setProtein(Protein protein) {
-        this.protein = protein;
-    }
-
-    public Fat getFat() {
-        return fat;
-    }
-
-    public void setFat(Fat fat) {
-        this.fat = fat;
+    public void setNutrition(Nutrition nutrition) {
+        this.nutrition = nutrition;
     }
 }

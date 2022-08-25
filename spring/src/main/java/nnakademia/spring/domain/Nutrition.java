@@ -1,17 +1,42 @@
 package nnakademia.spring.domain;
 
-abstract class Nutrition {
-    protected int quantity;
+public class Nutrition {
 
-    public int getQuantity() {
-        return quantity;
+    int carbohydrate;
+    int protein;
+    int fat;
+
+    public Nutrition() {
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public Nutrition(int carbohydrate, int protein, int fat) {
+        this.carbohydrate = carbohydrate;
+        this.protein = protein;
+        this.fat = fat;
     }
 
-    public int getKcals(){
-        return quantity * 1;
+    public int getCarbohydrate() {
+        return carbohydrate;
     }
+
+    public void setCarbohydrate(int carbohydrate) {
+        this.carbohydrate = carbohydrate;
+    }
+
+    public int getProtein() {
+        return protein;
+    }
+
+    public void setProtein(int protein) {
+        this.protein = protein;
+    }
+
+    public int getFat() {
+        return fat;
+    }
+
+    public void setFat(int fat) {
+        this.fat = fat;
+    }
+
 }

@@ -5,11 +5,7 @@ public class Ingredient {
     Long id;
     String name;
 
-    Carbohydrate carbohydrate;
-
-    Protein protein;
-
-    Fat fat;
+    Nutrition nutrition;
 
     public Long getId() {
         return id;
@@ -27,27 +23,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public Carbohydrate getCarbohydrate() {
-        return carbohydrate;
+    public Nutrition getNutrition() {
+        return nutrition;
     }
 
-    public void setCarbohydrate(Carbohydrate carbohydrate) {
-        this.carbohydrate = carbohydrate;
-    }
-
-    public Protein getProtein() {
-        return protein;
-    }
-
-    public void setProtein(Protein protein) {
-        this.protein = protein;
-    }
-
-    public Fat getFat() {
-        return fat;
-    }
-
-    public void setFat(Fat fat) {
-        this.fat = fat;
+    public void setNutrition(Nutrition nutrition) {
+        this.nutrition = nutrition;
     }
 }
