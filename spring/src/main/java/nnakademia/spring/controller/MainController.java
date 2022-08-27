@@ -1,5 +1,6 @@
 package nnakademia.spring.controller;
 
+import nnakademia.spring.domain.Allergenic;
 import nnakademia.spring.domain.Food;
 import nnakademia.spring.domain.Ingredient;
 import nnakademia.spring.mapper.AllergenicDTOMapper;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -89,18 +91,41 @@ public class MainController {
             Model model){
 
         FoodFormData foodFormData = new FoodFormData();
-        List<String> ingredientsNames = ingredientService
-                .findAll()
-                .stream()
-                .map(Ingredient::getName)
-                .toList();
 
-//        FoodProperties foodProperties = new FoodProperties();
-//        foodProperties.setNumOfAllergens(foodPropertiesFromForm.getNumOfAllergens());
-//        foodProperties.setNumOfIngredients(foodPropertiesFromForm.getNumOfIngredients());
-//        model.addAttribute("foodProperties", foodProperties);
+        foodFormData.setIngredients(ingredientService.findAll());
+        foodFormData.setIngredientIdArray(new Long[foodPropertiesFromForm.getNumOfIngredients()]);
+
+        foodFormData.setAllergens(allergenicService.findAll());
+        foodFormData.setAllergensArray(new String[foodPropertiesFromForm.getNumOfAllergens()]);
+
+        model.addAttribute(foodFormData);
 
         return "food-form";
+    }
+
+    @PostMapping("/saveFood")
+    public String saveFood(@ModelAttribute FoodFormData foodFormData){
+        List<Allergenic> chosenAllergenicList = List.of(foodFormData.getAllergensArray())
+                .stream()
+                .map(a -> allergenicService.findById(a))
+                .toList();
+        foodFormData.setChosenAllergens(chosenAllergenicList);
+
+        List<Ingredient> chosenIngredientList = List.of(foodFormData.getIngredientIdArray())
+                .stream()
+                .map(a -> ingredientService.findById(a))
+                .toList();
+        foodFormData.setChosenIngredients(chosenIngredientList);
+
+
+
+        System.out.println("Allergen List:");
+        foodFormData.getChosenAllergens().forEach(a -> System.out.println("name: " + a.getName() + ", effect: " + a.getEffect()));
+
+        System.out.println("Ingredient List:");
+        foodFormData.getChosenIngredients().forEach(a -> System.out.println("name: " + a.getName() + " " + a.getNutrition()));
+
+        return "home";
     }
 
 

@@ -47,4 +47,5 @@ public class AllergenicService {
         allergenicRepository.deleteById(name);
         return deletedAllergenic;
     }
+
 }

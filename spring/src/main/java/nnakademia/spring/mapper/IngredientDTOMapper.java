@@ -9,7 +9,7 @@ public class IngredientDTOMapper {
 
     public Ingredient fromIngredientDTO(IngredientDTO ingredientDTO){
         Ingredient ingredient = new Ingredient();
-        ingredient.setName(ingredientDTO.getName());
+        ingredient.setName(ingredientDTO.getName().toLowerCase());
         ingredient.setNutrition(new Nutrition(
                 ingredientDTO.getCarbohydrate(),
                 ingredientDTO.getProtein(),

@@ -1,11 +1,17 @@
 package nnakademia.spring;
 
+import nnakademia.spring.controller.FoodFormData;
+import nnakademia.spring.domain.Allergenic;
+import nnakademia.spring.domain.Food;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+
+import java.util.Arrays;
+import java.util.List;
 
 // SPRING BOOT APP BELÉPÉSI PONTJA
 // - közönséges class + annotáció
@@ -45,6 +51,13 @@ public class Application implements ApplicationContextAware, CommandLineRunner {
 		for (String beanDefinitionName : beanDefinitionNames) {
 			System.out.println(beanDefinitionName);
 		}
-	}
+//		FoodFormData foodFormData = new FoodFormData();
+//		String[] array = {"ads", "fdsfdsfd"};
+//		Arrays.stream(array).forEach(System.out::println);
+//		foodFormData.setAllergensArray(array);
+//		List<Allergenic> allergenicList = foodFormData.fromALlergenicArrayToList();
+////		System.out.println(allergenicList.size());
+//		System.out.println("*****************************");
+ 	}
 }
 

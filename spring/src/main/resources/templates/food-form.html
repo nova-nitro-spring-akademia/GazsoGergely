@@ -6,14 +6,28 @@
 </head>
 <body>
 <h1>FOOD FORM</h1>
-<form action="#" th:action="@{/addfoodform}" th:object="${foodProperties}" method="POST">
+<form action="#" th:action="@{/saveFood}" th:object="${foodFormData}" method="POST">
   <table border="2">
     <tr>
-<!--      <td><input type="number" th:field="${foodProperties.numOfALlergens}"></td>-->
-      <td><input type="number" th:field="*{numOfIngredients}"></td>
-        <td><input type="number" th:field="*{numOfAllergens}"></td>
+        <h2>Choose allergens!</h2>
+        <td th:each="i : *{allergensArray}">
+            <select th:field="*{allergensArray}">
+                <option th:each="i : *{allergens}" th:value="${i.getName}"  th:text="${i.getName}"></option>
+            </select>
+        </td>
     </tr>
   </table>
+    <table>
+        <tr>
+            <h2>Choose ingredients!</h2>
+            <td th:each="i : *{IngredientIdArray}">
+                <select th:field="*{IngredientIdArray}">
+                    <option th:each="i : *{ingredients}" th:value="${i.getId}" th:text="${i.getName()}"></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <button type="submit">save food</button>
 </form>
 </body>
 </html>

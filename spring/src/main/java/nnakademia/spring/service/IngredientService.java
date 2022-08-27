@@ -6,7 +6,9 @@ import nnakademia.spring.data.IngredientRepository;
 import nnakademia.spring.domain.Allergenic;
 import nnakademia.spring.domain.Ingredient;
 import nnakademia.spring.mapper.IngredientEntityMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -31,5 +33,14 @@ public class IngredientService {
                 .findAll();
         return ingredientEntityMapper.fromIngredientEntityList(ingredientEntities);
     }
+
+    public Ingredient findById(Long id){
+        IngredientEntity ingredientEntity = ingredientRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return ingredientEntityMapper.fromIngredientEntity(ingredientEntity);
+    }
+
+
 
 }

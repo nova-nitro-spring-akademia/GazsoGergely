@@ -39,4 +39,8 @@ public class Nutrition {
         this.fat = fat;
     }
 
+    @Override
+    public String toString() {
+        return "[carbohydrate: " + carbohydrate + " protein: " + protein + " fat: " + fat + "]";
+    }
 }
