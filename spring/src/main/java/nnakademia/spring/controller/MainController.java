@@ -1,6 +1,7 @@
 package nnakademia.spring.controller;
 
 import nnakademia.spring.domain.Food;
+import nnakademia.spring.domain.Ingredient;
 import nnakademia.spring.mapper.AllergenicDTOMapper;
 import nnakademia.spring.mapper.FoodDTOMapper;
 import nnakademia.spring.mapper.IngredientDTOMapper;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping
@@ -84,6 +87,13 @@ public class MainController {
     public String addFoodForm(
             @ModelAttribute("foodProperties") FoodProperties foodPropertiesFromForm,
             Model model){
+
+        FoodFormData foodFormData = new FoodFormData();
+        List<String> ingredientsNames = ingredientService
+                .findAll()
+                .stream()
+                .map(Ingredient::getName)
+                .toList();
 
 //        FoodProperties foodProperties = new FoodProperties();
 //        foodProperties.setNumOfAllergens(foodPropertiesFromForm.getNumOfAllergens());

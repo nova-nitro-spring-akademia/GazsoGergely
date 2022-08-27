@@ -4,6 +4,8 @@ import nnakademia.spring.data.IngredientEntity;
 import nnakademia.spring.domain.Ingredient;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class IngredientEntityMapper {
 
@@ -23,4 +25,7 @@ public class IngredientEntityMapper {
         return ingredientEntity;
     }
 
+    public List<Ingredient> fromIngredientEntityList(List<IngredientEntity> allergenicEntities) {
+        return allergenicEntities.stream().map(this::fromIngredientEntity).toList();
+    }
 }

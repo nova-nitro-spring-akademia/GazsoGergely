@@ -10,6 +10,8 @@ public class IngredientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+
+    @Column(unique=true)
     String name;
 
     @Embedded
