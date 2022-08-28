@@ -5,6 +5,7 @@ import nnakademia.spring.domain.Ingredient;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class FoodEntity {
@@ -15,8 +16,9 @@ public class FoodEntity {
 
     @Column(unique = true)
     String name;
-//INNNEN KELL FOLYTATNI MANYTOMANY-vel!!!
-    List<Ingredient> ingredients;
 
-    List<Allergenic> allergens;
+    @ManyToMany(mappedBy = "foodEntityList")
+    Set<IngredientEntity> ingredients;
+
+//    List<AllergenicEntity> allergens;
 }

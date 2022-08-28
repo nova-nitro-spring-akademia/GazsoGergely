@@ -3,6 +3,8 @@ package nnakademia.spring.data;
 import nnakademia.spring.domain.Nutrition;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class IngredientEntity {
@@ -16,6 +18,14 @@ public class IngredientEntity {
 
     @Embedded
     Nutrition nutrition;
+
+    @ManyToMany
+    @JoinTable(
+        name = "food_ingredient_element",
+        joinColumns = @JoinColumn(name = "ingredient_id"),
+        inverseJoinColumns = @JoinColumn(name = "food_id")
+    )
+    Set<FoodEntity> foodEntityList;
 
     public Long getId() {
         return id;
