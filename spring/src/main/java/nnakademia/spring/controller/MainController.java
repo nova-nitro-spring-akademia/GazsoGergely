@@ -5,6 +5,7 @@ import nnakademia.spring.domain.Food;
 import nnakademia.spring.domain.Ingredient;
 import nnakademia.spring.mapper.AllergenicDTOMapper;
 import nnakademia.spring.mapper.FoodDTOMapper;
+import nnakademia.spring.mapper.FoodEntityMapper;
 import nnakademia.spring.mapper.IngredientDTOMapper;
 import nnakademia.spring.restcontroller.AllergenicDTO;
 import nnakademia.spring.restcontroller.FoodDTO;
@@ -38,13 +39,16 @@ public class MainController {
 
     FoodService foodService;
 
-    public MainController(AllergenicDTOMapper allergenicDTOMapper, AllergenicService allergenicService, IngredientDTOMapper ingredientDTOMapper, IngredientService ingredientService, FoodDTOMapper foodDTOMapper, FoodService foodService) {
+    FoodEntityMapper foodEntityMapper;
+
+    public MainController(AllergenicDTOMapper allergenicDTOMapper, AllergenicService allergenicService, IngredientDTOMapper ingredientDTOMapper, IngredientService ingredientService, FoodDTOMapper foodDTOMapper, FoodService foodService, FoodEntityMapper foodEntityMapper) {
         this.allergenicDTOMapper = allergenicDTOMapper;
         this.allergenicService = allergenicService;
         this.ingredientDTOMapper = ingredientDTOMapper;
         this.ingredientService = ingredientService;
         this.foodDTOMapper = foodDTOMapper;
         this.foodService = foodService;
+        this.foodEntityMapper = foodEntityMapper;
     }
 
     @GetMapping("/home")
@@ -117,15 +121,23 @@ public class MainController {
                 .toList();
         foodFormData.setChosenIngredients(chosenIngredientList);
 
+        Food newFood = new Food();
+        newFood.setName(foodFormData.getName());
+        newFood.setIngredients(foodFormData.getChosenIngredients());
 
+        foodService.save(newFood);
 
-        System.out.println("Allergen List:");
-        foodFormData.getChosenAllergens().forEach(a -> System.out.println("name: " + a.getName() + ", effect: " + a.getEffect()));
+        return "redirect:/home";
 
-        System.out.println("Ingredient List:");
-        foodFormData.getChosenIngredients().forEach(a -> System.out.println("name: " + a.getName() + " " + a.getNutrition()));
-
-        return "home";
+//        System.out.println();
+//        System.out.println("name of food: " + foodFormData.getName());
+//        System.out.println();
+//
+//        System.out.println("Allergen List:");
+//        foodFormData.getChosenAllergens().forEach(a -> System.out.println("name: " + a.getName() + ", effect: " + a.getEffect()));
+//
+//        System.out.println("Ingredient List:");
+//        foodFormData.getChosenIngredients().forEach(a -> System.out.println("name: " + a.getName() + " " + a.getNutrition()));
     }
 
 

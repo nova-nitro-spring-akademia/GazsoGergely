@@ -13,18 +13,12 @@ public class IngredientEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(unique=true)
     String name;
 
     @Embedded
     Nutrition nutrition;
 
-    @ManyToMany
-    @JoinTable(
-        name = "food_ingredient_element",
-        joinColumns = @JoinColumn(name = "ingredient_id"),
-        inverseJoinColumns = @JoinColumn(name = "food_id")
-    )
+    @ManyToMany(mappedBy = "ingredients")
     Set<FoodEntity> foodEntityList;
 
     public Long getId() {

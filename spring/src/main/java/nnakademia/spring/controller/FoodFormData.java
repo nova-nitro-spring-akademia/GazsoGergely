@@ -11,6 +11,8 @@ import java.util.List;
 
 public class FoodFormData {
 
+    String name;
+
     List<Ingredient> ingredients;
 
     List<Ingredient> chosenIngredients;
@@ -70,5 +72,13 @@ public class FoodFormData {
 
     public void setIngredientIdArray(Long[] ingredientIdArray) {
         IngredientIdArray = ingredientIdArray;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
