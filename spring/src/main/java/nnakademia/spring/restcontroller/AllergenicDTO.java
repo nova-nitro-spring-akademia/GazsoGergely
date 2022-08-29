@@ -2,6 +2,7 @@ package nnakademia.spring.restcontroller;
 
 public class AllergenicDTO {
 
+    Long id;
     String name;
 
     String effect;
@@ -20,5 +21,13 @@ public class AllergenicDTO {
 
     public void setEffect(String effect) {
         this.effect = effect;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

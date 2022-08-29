@@ -11,5 +11,29 @@
 <a href="/addingredientform">add ingredient</a>
 <br>
 <a href="/addfoodpropertiesform">add food</a>
+<br>
+<br>
+
+<h2>Foods:</h2>
+<!--<form action="#" th:action="#" th:object="${foodDTOList}" method="POST">-->
+<table border="2">
+    <thead style="color:red">
+     <tr>
+         <td>name</td>
+         <td>allergens</td>
+         <td>ingredients</td>
+     </tr>
+    </thead>
+     <tr th:each="foodDTO : ${foodDTOList}">
+         <td><label th:text="${foodDTO.getName()}"></label></td>
+         <td><label th:text="${foodDTO.allergensToString()}"></label></td>
+         <td><label th:text="${foodDTO.ingredientsToString()}"></label></td>
+         <td><a th:href="@{/home}">Edit Food </a></td>
+         <td><a th:href="@{/home}">Delete Food </a></td>
+     </tr>
+    <tr>
+    </tr>
+</table>
+<!--</form>-->
 </body>
 </html>

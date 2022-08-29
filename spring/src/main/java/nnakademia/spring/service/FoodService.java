@@ -6,6 +6,8 @@ import nnakademia.spring.domain.Food;
 import nnakademia.spring.mapper.FoodEntityMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class FoodService {
 
@@ -23,5 +25,10 @@ public class FoodService {
         FoodEntity savedFoodEntity = foodRepository.save(foodEntity);
         Food savedFood = foodEntityMapper.fromFoodEntity(savedFoodEntity);
         return savedFood;
+    }
+
+    public List<Food> findAll() {
+        List<FoodEntity> foodEntityList = foodRepository.findAll();
+        return foodEntityMapper.fromFoodEntityList(foodEntityList);
     }
 }

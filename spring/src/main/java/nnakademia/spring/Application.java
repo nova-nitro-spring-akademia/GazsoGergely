@@ -51,13 +51,10 @@ public class Application implements ApplicationContextAware, CommandLineRunner {
 		for (String beanDefinitionName : beanDefinitionNames) {
 			System.out.println(beanDefinitionName);
 		}
-//		FoodFormData foodFormData = new FoodFormData();
-//		String[] array = {"ads", "fdsfdsfd"};
-//		Arrays.stream(array).forEach(System.out::println);
-//		foodFormData.setAllergensArray(array);
-//		List<Allergenic> allergenicList = foodFormData.fromALlergenicArrayToList();
-////		System.out.println(allergenicList.size());
-//		System.out.println("*****************************");
+
+//		String s = List.of("kdsh", "asd", "lsdu").stream().toString();
+
+
  	}
 }
 

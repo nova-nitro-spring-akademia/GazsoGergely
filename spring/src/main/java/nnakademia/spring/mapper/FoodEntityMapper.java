@@ -1,7 +1,9 @@
 package nnakademia.spring.mapper;
 
+import nnakademia.spring.data.AllergenicEntity;
 import nnakademia.spring.data.FoodEntity;
 import nnakademia.spring.data.IngredientEntity;
+import nnakademia.spring.domain.Allergenic;
 import nnakademia.spring.domain.Food;
 import nnakademia.spring.domain.Ingredient;
 import org.springframework.stereotype.Component;
@@ -15,8 +17,11 @@ public class FoodEntityMapper {
 
     IngredientEntityMapper ingredientEntityMapper;
 
-    public FoodEntityMapper(IngredientEntityMapper ingredientEntityMapper) {
+    AllergenicEntityMapper allergenicEntityMapper;
+
+    public FoodEntityMapper(IngredientEntityMapper ingredientEntityMapper, AllergenicEntityMapper allergenicEntityMapper) {
         this.ingredientEntityMapper = ingredientEntityMapper;
+        this.allergenicEntityMapper = allergenicEntityMapper;
     }
 
     public FoodEntity toFoodEntity(Food food){
@@ -28,8 +33,14 @@ public class FoodEntityMapper {
                 .stream()
                 .map(ingredientEntityMapper::toingredientEntity)
                 .collect(Collectors.toSet());
-
         foodEntity.setIngredients(ingredientEntitySet);
+
+        //        List<Allergenic> --> Set<AllergenicEntity>
+        Set<AllergenicEntity> allergenicEntitySet =food.getAllergens()
+                .stream()
+                .map(allergenicEntityMapper::toAllergenicEntity)
+                .collect(Collectors.toSet());
+        foodEntity.setAllergens(allergenicEntitySet);
 
         return foodEntity;
     }
@@ -42,11 +53,25 @@ public class FoodEntityMapper {
                 .stream()
                 .map(ingredientEntityMapper::fromIngredientEntity)
                 .collect(Collectors.toList());
-
         food.setIngredients(ingredientList);
+
+        List<Allergenic> allergenicList = foodEntity.getAllergens()
+                .stream()
+                .map(allergenicEntityMapper::fromAllergenicEntity)
+                .toList();
+        food.setAllergens(allergenicList);
+
         food.setId(foodEntity.getId());
 
         return food;
 
+    }
+
+    public List<Food> fromFoodEntityList(List<FoodEntity> foodEntityList) {
+        List<Food> foodList = foodEntityList
+                .stream()
+                .map(this::fromFoodEntity)
+                .toList();
+        return foodList;
     }
 }

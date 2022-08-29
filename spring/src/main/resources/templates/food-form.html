@@ -16,8 +16,9 @@
     <tr>
         <h2>Choose allergens!</h2>
         <td th:each="i : *{allergensArray}">
-            <select th:field="*{allergensArray}">
-                <option th:each="i : *{allergens}" th:value="${i.getName}"  th:text="${i.getName}"></option>
+<!--            multiple="multiple"-->
+            <select th:field="*{allergensArray}" >
+                <option th:each="i : *{allergens}" th:value="${i.getId}"  th:text="${i.getName()}"></option>
             </select>
         </td>
     </tr>

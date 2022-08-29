@@ -24,8 +24,13 @@ public class FoodEntity {
     )
     Set<IngredientEntity> ingredients;
 
-//    List<AllergenicEntity> allergens;
-
+    @ManyToMany
+    @JoinTable(
+            name = "food_allergenic_element",
+            joinColumns = @JoinColumn(name = "food_id"),
+            inverseJoinColumns = @JoinColumn(name = "allergenic_id")
+    )
+    Set<AllergenicEntity> allergens;
 
     public Long getId() {
         return id;
@@ -49,5 +54,13 @@ public class FoodEntity {
 
     public void setIngredients(Set<IngredientEntity> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Set<AllergenicEntity> getAllergens() {
+        return allergens;
+    }
+
+    public void setAllergens(Set<AllergenicEntity> allergens) {
+        this.allergens = allergens;
     }
 }

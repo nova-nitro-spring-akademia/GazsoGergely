@@ -17,7 +17,7 @@ public class FoodFormData {
 
     List<Ingredient> chosenIngredients;
 
-    String[] allergensArray;
+    Long[] allergensArray;
 
     Long[] IngredientIdArray;
 
@@ -58,11 +58,11 @@ public class FoodFormData {
         this.chosenAllergens = chosenAllergens;
     }
 
-    public String[] getAllergensArray() {
+    public Long[] getAllergensArray() {
         return allergensArray;
     }
 
-    public void setAllergensArray(String[] allergensArray) {
+    public void setAllergensArray(Long[] allergensArray) {
         this.allergensArray = allergensArray;
     }
 

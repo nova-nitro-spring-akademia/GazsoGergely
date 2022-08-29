@@ -4,6 +4,8 @@ import nnakademia.spring.domain.Food;
 import nnakademia.spring.restcontroller.FoodDTO;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class FoodDTOMapper {
 
@@ -24,4 +26,10 @@ public class FoodDTOMapper {
         return foodDTO;
     }
 
+    public List<FoodDTO> toFoodDTOList(List<Food> foodList) {
+        return foodList
+                .stream()
+                .map(this::toFoodDTO)
+                .toList();
+    }
 }

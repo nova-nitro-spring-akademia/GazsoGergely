@@ -2,6 +2,7 @@ package nnakademia.spring.restcontroller;
 
 import nnakademia.spring.domain.Allergenic;
 import nnakademia.spring.domain.Ingredient;
+import nnakademia.spring.mapper.FoodDTOMapper;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class FoodDTO {
     List<Ingredient> ingredients;
 
     List<Allergenic> allergens;
+
 
     public Long getId() {
         return id;
@@ -47,5 +49,14 @@ public class FoodDTO {
         this.allergens = allergens;
     }
 
+    public String allergensToString(){
+        List<String >allergenNameList = this.allergens.stream().map(a -> a.getName()).toList();
+        return String.join(", ", allergenNameList);
+    }
+
+    public String ingredientsToString(){
+        List<String >ingredientsNameList = this.ingredients.stream().map(a -> a.getName()).toList();
+        return String.join(", ", ingredientsNameList);
+    }
 
 }

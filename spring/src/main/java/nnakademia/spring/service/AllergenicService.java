@@ -28,9 +28,9 @@ public class AllergenicService {
         return allergenicEntityMapper.fromAllergenicEntity(savedEntity);
     }
 
-    public Allergenic findById(String name) {
+    public Allergenic findById(Long id) {
         AllergenicEntity allergenicEntity = allergenicRepository
-                .findById(name)
+                .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)
                 );
         return  allergenicEntityMapper.fromAllergenicEntity(allergenicEntity);
@@ -42,9 +42,9 @@ public class AllergenicService {
         return allergenicEntityMapper.fromAllergenicEntityList(allergenicEntities);
     }
 
-    public Allergenic deleteById(String name) {
-        Allergenic deletedAllergenic = findById(name);
-        allergenicRepository.deleteById(name);
+    public Allergenic deleteById(Long id) {
+        Allergenic deletedAllergenic = findById(id);
+        allergenicRepository.deleteById(id);
         return deletedAllergenic;
     }
 

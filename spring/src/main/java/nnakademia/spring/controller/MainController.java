@@ -52,7 +52,9 @@ public class MainController {
     }
 
     @GetMapping("/home")
-    public String home(){
+    public String home(Model model){
+        List<FoodDTO> foodDTOList = foodDTOMapper.toFoodDTOList(foodService.findAll());
+        model.addAttribute("foodDTOList", foodDTOList);
         return "home";
     }
 
@@ -100,7 +102,7 @@ public class MainController {
         foodFormData.setIngredientIdArray(new Long[foodPropertiesFromForm.getNumOfIngredients()]);
 
         foodFormData.setAllergens(allergenicService.findAll());
-        foodFormData.setAllergensArray(new String[foodPropertiesFromForm.getNumOfAllergens()]);
+        foodFormData.setAllergensArray(new Long[foodPropertiesFromForm.getNumOfAllergens()]);
 
         model.addAttribute(foodFormData);
 
@@ -124,20 +126,11 @@ public class MainController {
         Food newFood = new Food();
         newFood.setName(foodFormData.getName());
         newFood.setIngredients(foodFormData.getChosenIngredients());
+        newFood.setAllergens(foodFormData.getChosenAllergens());
 
         foodService.save(newFood);
 
         return "redirect:/home";
-
-//        System.out.println();
-//        System.out.println("name of food: " + foodFormData.getName());
-//        System.out.println();
-//
-//        System.out.println("Allergen List:");
-//        foodFormData.getChosenAllergens().forEach(a -> System.out.println("name: " + a.getName() + ", effect: " + a.getEffect()));
-//
-//        System.out.println("Ingredient List:");
-//        foodFormData.getChosenIngredients().forEach(a -> System.out.println("name: " + a.getName() + " " + a.getNutrition()));
     }
 
 

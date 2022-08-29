@@ -28,10 +28,9 @@ public class AllergenicRestController {
         return allergenicDTOMapper.toAllergenicDTO(allergenicSaved);
     }
 
-    @GetMapping("/{name}")
-    public AllergenicDTO getAllergenic(@PathVariable String name){
-        name = name.toLowerCase();
-        Allergenic allergenic = allergenicService.findById(name);
+    @GetMapping("/{id}")
+    public AllergenicDTO getAllergenic(@PathVariable Long id){
+        Allergenic allergenic = allergenicService.findById(id);
         return allergenicDTOMapper.toAllergenicDTO(allergenic);
     }
 
@@ -42,10 +41,9 @@ public class AllergenicRestController {
         return allergenicDTOMapper.toAllergenicDTOList(allergens);
     }
 
-    @DeleteMapping("/{name}")
-    public AllergenicDTO deleteAllergen(@PathVariable String name){
-        name = name.toLowerCase();
-        return allergenicDTOMapper.toAllergenicDTO(allergenicService.deleteById(name));
+    @DeleteMapping("/{id}")
+    public AllergenicDTO deleteAllergen(@PathVariable Long id){
+        return allergenicDTOMapper.toAllergenicDTO(allergenicService.deleteById(id));
     }
 
 }

@@ -2,6 +2,7 @@ package nnakademia.spring.domain;
 
 public class Allergenic {
 
+    Long id;
     String name;
     String effect;
 
@@ -19,5 +20,13 @@ public class Allergenic {
 
     public void setEffect(String effect) {
         this.effect = effect;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
