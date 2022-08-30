@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>FOOD EDIT</title>
+</head>
+<body>
+<h1>FOOD EDIT</h1>
+<form action="#" th:action="@{'/editfood/' + ${foodEditDTO.getId()}}" th:object="${foodEditDTO}" method="POST">
+  <table>
+      <tr>
+          <td><input th:field="*{name}"></td>
+      </tr>
+  </table>
+  <table border="2">
+    <tr>
+        <h2>Edit allergens!</h2>
+        <td>
+<!--            multiple="multiple"-->
+            <select th:name="*{allergens}" multiple="multiple">
+<!--                selected="${foodEditDTO.includesAllergenic(i)}"-->
+                <option th:each="i : *{allAllergens}" th:value="${i.id}"  th:text="${i.name}" th:selected="${foodEditDTO.includesAllergenic(i)}"></option>
+            </select>
+        </td>
+    </tr>
+  </table>
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <h2>Edit ingredients!</h2>-->
+<!--            <td th:each="i : *{IngredientIdArray}">-->
+<!--                <select th:field="*{IngredientIdArray}" multiple="multiple">-->
+<!--                    <option th:each="i : *{ingredients}" th:value="${i.getId}" th:text="${i.getName()}"></option>-->
+<!--                </select>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+    <button type="submit">save food</button>
+</form>
+</body>
+</html>

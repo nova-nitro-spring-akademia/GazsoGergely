@@ -31,4 +31,8 @@ public class FoodService {
         List<FoodEntity> foodEntityList = foodRepository.findAll();
         return foodEntityMapper.fromFoodEntityList(foodEntityList);
     }
+
+    public Food findById(Long id) {
+        return foodEntityMapper.fromFoodEntity(foodRepository.findById(id).orElseThrow());
+    }
 }

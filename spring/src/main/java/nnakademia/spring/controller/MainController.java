@@ -15,10 +15,7 @@ import nnakademia.spring.service.FoodService;
 import nnakademia.spring.service.IngredientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -131,6 +128,27 @@ public class MainController {
         foodService.save(newFood);
 
         return "redirect:/home";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editFood(@PathVariable Long id, Model model){
+
+        FoodDTO foodDTO = foodDTOMapper.toFoodDTO(foodService.findById(id));
+        List<Allergenic> allAllergens =allergenicService.findAll();
+
+        FoodEditDTO foodEditDTO = new FoodEditDTO();
+        foodEditDTO.setId(foodDTO.getId());
+        foodEditDTO.setName(foodDTO.getName());
+        foodEditDTO.setAllergens(foodDTO.getAllergens());
+        foodEditDTO.setIngredients(foodDTO.getIngredients());
+        foodEditDTO.setAllAllergens(allergenicService.findAll());
+
+        List<Boolean> booleanList = allAllergens.stream().map(a -> foodEditDTO.includesAllergenic(a)).toList();
+
+        model.addAttribute(foodEditDTO);
+
+        return "food-edit";
+
     }
 
 
