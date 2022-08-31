@@ -55,6 +55,9 @@ public class RestAPIController {
     @PostMapping("/tasks")
     public TaskDTO saveTask(@RequestBody TaskDTO taskDTO){
 
+        if(taskDTO.getPersonId()==null){
+            throw new IllegalArgumentException("Person id can't be null!!!");
+        }
         //saving task
         Task task = taskDTOMapper.fromTaskDTO(taskDTO);
         Person person = personService.findById(taskDTO.getPersonId());

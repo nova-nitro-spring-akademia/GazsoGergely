@@ -12,11 +12,6 @@ import java.util.stream.Collectors;
 @Component
 public class TaskDTOMapper {
 
-    PersonDTOMapper personDTOMapper;
-
-    public TaskDTOMapper(PersonDTOMapper personDTOMapper) {
-        this.personDTOMapper = personDTOMapper;
-    }
 
     public TaskDTO toTaskDTO(Task task){
         TaskDTO taskDTO = new TaskDTO();

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>SHOW-TASK-FORM</h1>
+
+<form action="#" th:action="@{/savetask}" th:object="${taskFormDTO}" method="POST">
+    <table border="2">
+        <tr>
+            <td><label>Name</label></td>
+            <td><label>Priority</label></td>
+            <td><label>DaysLeft</label></td>
+            <td><label>Responsible Person</label></td>
+        </tr>
+        <tr>
+            <td><input type="text" th:field="*{name}"></td>
+            <td><input type="number" th:field="*{priority}"></td>
+            <td><input type="number" th:field="*{daysLeft}"></td>
+            <td>
+                <select th:field="*{personId}">
+                    <option th:each="i : *{allPersonDTOs}"
+                            th:text="${i.name}"
+                            th:value="${i.id}">
+                    </option>
+                </select>
+            </td>
+            <td><button type="submit">save</button></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

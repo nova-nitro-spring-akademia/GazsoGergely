@@ -4,6 +4,9 @@ import com.gergelygazso.springvizsgagyakorlas.controller.PersonDTO;
 import com.gergelygazso.springvizsgagyakorlas.domain.Person;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 public class PersonDTOMapper {
 
@@ -21,6 +24,10 @@ public class PersonDTOMapper {
         person.setName(personDTO.getName());
         person.setNextTaskStrategy(personDTO.getNextTaskStrategy());
         return person;
+    }
+
+    public Set<PersonDTO> toPersonDTOSet(Set<Person> persons){
+        return persons.stream().map(this::toPersonDTO).collect(Collectors.toSet());
     }
 
 }

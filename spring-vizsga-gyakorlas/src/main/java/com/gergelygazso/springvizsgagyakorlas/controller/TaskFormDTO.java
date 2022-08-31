@@ -1,9 +1,8 @@
 package com.gergelygazso.springvizsgagyakorlas.controller;
 
+import java.util.Set;
 
-import com.gergelygazso.springvizsgagyakorlas.domain.Person;
-
-public class TaskDTO {
+public class TaskFormDTO {
 
     Long id;
 
@@ -13,7 +12,11 @@ public class TaskDTO {
 
     int daysLeft;
 
+    PersonDTO personDTO;
+
     Long personId;
+
+    Set<PersonDTO> allPersonDTOs;
 
     public Long getId() {
         return id;
@@ -47,11 +50,28 @@ public class TaskDTO {
         this.daysLeft = daysLeft;
     }
 
+    public PersonDTO getPersonDTO() {
+        return personDTO;
+    }
+
+    public void setPersonDTO(PersonDTO personDTO) {
+        this.personDTO = personDTO;
+    }
+
+
+    public Set<PersonDTO> getAllPersonDTOs() {
+        return allPersonDTOs;
+    }
+
+    public void setAllPersonDTOs(Set<PersonDTO> allPersonDTOs) {
+        this.allPersonDTOs = allPersonDTOs;
+    }
+
     public Long getPersonId() {
         return personId;
     }
 
-    public void setPersonId(long personId) {
+    public void setPersonId(Long personId) {
         this.personId = personId;
     }
 }
