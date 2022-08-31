@@ -6,8 +6,17 @@ import com.gergelygazso.springvizsgagyakorlas.domain.Person;
 import com.gergelygazso.springvizsgagyakorlas.domain.Task;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 public class TaskDTOMapper {
+
+    PersonDTOMapper personDTOMapper;
+
+    public TaskDTOMapper(PersonDTOMapper personDTOMapper) {
+        this.personDTOMapper = personDTOMapper;
+    }
 
     public TaskDTO toTaskDTO(Task task){
         TaskDTO taskDTO = new TaskDTO();
@@ -15,18 +24,23 @@ public class TaskDTOMapper {
         taskDTO.setName(task.getName());
         taskDTO.setPriority(task.getPriority());
         taskDTO.setDaysLeft(task.getDaysLeft());
-        taskDTO.setPerson(task.getPerson());
+        taskDTO.setPersonId(task.getPerson().getId());
         return taskDTO;
     }
 
-    public Task fromTaskDTO(TaskDTO taskDTO, Person person){
+    public Task fromTaskDTO(TaskDTO taskDTO){
         Task task = new Task();
         task.setId(taskDTO.getId());
         task.setName(taskDTO.getName());
         task.setPriority(taskDTO.getPriority());
         task.setDaysLeft(taskDTO.getDaysLeft());
-        task.setPerson(person);
         return task;
+    }
+
+    public Set<TaskDTO> toTaskDTOSet(Set<Task> tasks) {
+        return tasks.stream()
+                .map(this::toTaskDTO)
+                .collect(Collectors.toSet());
     }
 
 }

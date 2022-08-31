@@ -1,5 +1,6 @@
 package com.gergelygazso.springvizsgagyakorlas.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Person {
@@ -40,6 +41,15 @@ public class Person {
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public void addTask(Task task){
+        if(this.tasks==null){
+            this.tasks=new HashSet<Task>();
+            this.tasks.add(task);
+        }else{
+            this.tasks.add(task);
+        }
     }
 
 

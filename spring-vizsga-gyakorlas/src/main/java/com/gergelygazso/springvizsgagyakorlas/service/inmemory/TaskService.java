@@ -4,6 +4,7 @@ import com.gergelygazso.springvizsgagyakorlas.domain.Person;
 import com.gergelygazso.springvizsgagyakorlas.domain.Task;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -12,7 +13,14 @@ public class TaskService {
     Set<Task> tasks;
 
     public Task save(Task task){
-        tasks.add(task);
+        if (tasks==null){
+            tasks=new HashSet<Task>();
+            tasks.add(task);
+        }else{
+            tasks.add(task);
+        }
+        //a Person Task listájába is mentsük el a Task-ot
+        task.getPerson().addTask(task);
         return task;
     }
 
