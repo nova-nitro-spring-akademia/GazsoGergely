@@ -12,7 +12,7 @@ public class PersonWithTasksDTO {
 
     String nextTaskStrategy;
 
-    Set<Task> tasks;
+    Set<TaskDTO> tasks;
 
     public Long getId() {
         return id;
@@ -38,11 +38,11 @@ public class PersonWithTasksDTO {
         this.nextTaskStrategy = nextTaskStrategy;
     }
 
-    public Set<Task> getTasks() {
+    public Set<TaskDTO> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Set<Task> tasks) {
+    public void setTasks(Set<TaskDTO> tasks) {
         this.tasks = tasks;
     }
 }

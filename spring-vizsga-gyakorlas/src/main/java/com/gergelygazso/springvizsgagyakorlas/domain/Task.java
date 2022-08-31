@@ -10,6 +10,8 @@ public class Task{
 
     int daysLeft;
 
+    Person person;
+
     public int getPriority() {
         return priority;
     }
@@ -41,5 +43,13 @@ public class Task{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }
