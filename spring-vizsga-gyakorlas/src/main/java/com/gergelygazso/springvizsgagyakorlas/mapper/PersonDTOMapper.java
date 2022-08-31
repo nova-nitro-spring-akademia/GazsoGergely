@@ -2,14 +2,16 @@ package com.gergelygazso.springvizsgagyakorlas.mapper;
 
 import com.gergelygazso.springvizsgagyakorlas.controller.PersonDTO;
 import com.gergelygazso.springvizsgagyakorlas.domain.Person;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PersonDTOMapper {
 
     public PersonDTO toPersonDTO(Person person){
         PersonDTO personDTO = new PersonDTO();
         personDTO.setId(person.getId());
-        personDTO.setName(personDTO.getName());
-        personDTO.setNextTaskStrategy(personDTO.getNextTaskStrategy());
+        personDTO.setName(person.getName());
+        personDTO.setNextTaskStrategy(person.getNextTaskStrategy().getClass().getSimpleName());
         return personDTO;
     }
 

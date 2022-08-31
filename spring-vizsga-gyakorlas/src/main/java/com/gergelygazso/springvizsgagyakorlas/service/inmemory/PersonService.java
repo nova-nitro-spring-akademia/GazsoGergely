@@ -3,8 +3,7 @@ package com.gergelygazso.springvizsgagyakorlas.service.inmemory;
 import com.gergelygazso.springvizsgagyakorlas.domain.Person;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class PersonService {
@@ -13,7 +12,12 @@ public class PersonService {
 
     public Person save(Person person){
 //        Person marci = new Person(Long.valueOf(1),"Marci", "daysLeft");
-        persons.add(person);
+        if (persons==null){
+            persons=new HashSet<Person>();
+            persons.add(person);
+        }else{
+            persons.add(person);
+        }
         return person;
     }
 

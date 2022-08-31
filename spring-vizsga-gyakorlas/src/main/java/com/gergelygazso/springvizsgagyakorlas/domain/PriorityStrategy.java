@@ -3,7 +3,7 @@ package com.gergelygazso.springvizsgagyakorlas.domain;
 import java.util.Comparator;
 import java.util.Set;
 
-public class PriorityStretegy implements  ChooseNextTaskStrategy{
+public class PriorityStrategy implements  ChooseNextTaskStrategy{
 
     @Override
     public Task chooseNextTask(Set<Task> tasks) {

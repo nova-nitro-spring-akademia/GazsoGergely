@@ -42,9 +42,6 @@ public class Person {
         this.tasks = tasks;
     }
 
-    public ChooseNextTaskStrategy getNextTaskStrategy() {
-        return nextTaskStrategy;
-    }
 
     public Long getId() {
         return id;
@@ -54,16 +51,20 @@ public class Person {
         this.id = id;
     }
 
+
+    public ChooseNextTaskStrategy getNextTaskStrategy() {
+        return nextTaskStrategy;
+    }
+
     public void setNextTaskStrategy(String strategy) {
         ChooseNextTaskStrategy nextTaskStrategy;
-        if (strategy.equals("daysLeft")){
+        if (strategy.equals("DaysLeftStrategy")){
             nextTaskStrategy = new DaysLeftStrategy();
         } else {
-            nextTaskStrategy = new PriorityStretegy();
+            nextTaskStrategy = new PriorityStrategy();
         }
         this.nextTaskStrategy = nextTaskStrategy;
     }
-
 
 
     public Task chooseNextTask(){
