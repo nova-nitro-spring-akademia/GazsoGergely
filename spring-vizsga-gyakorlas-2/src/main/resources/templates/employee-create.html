@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>EMPLOYEE CREATE</h1>
+<br>
+<form action="#" th:action="@{/saveemployee}" th:object="${employeeDTO}" method="POST">
+    <table border="2">
+        <tr>
+            <td><label>Name</label></td>
+            <td><label>Birth year</label></td>
+            <td><label>Start year</label></td>
+            <td><label>Last raise year</label></td>
+            <td><label>Salary</label></td>
+        </tr>
+        <tr>
+            <td><input type="text" th:field="*{name}"></td>
+            <td><input type="number" th:field="*{birthYear}"></td>
+            <td><input type="number" th:field="*{startYear}"></td>
+            <td><input type="number" th:field="*{lastRaiseYear}"></td>
+            <td><input type="number" th:field="*{salary}"></td>
+            <td><button type="submit">save</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

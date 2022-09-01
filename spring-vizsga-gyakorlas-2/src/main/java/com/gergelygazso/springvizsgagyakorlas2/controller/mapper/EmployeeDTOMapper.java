@@ -5,6 +5,9 @@ import com.gergelygazso.springvizsgagyakorlas2.data.EmployeeEntity;
 import com.gergelygazso.springvizsgagyakorlas2.service.Employee;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 public class EmployeeDTOMapper {
     Long id;
@@ -39,6 +42,10 @@ public class EmployeeDTOMapper {
         employee.setLastRaiseYear(employeeDTO.getLastRaiseYear());
         employee.setSalary(employeeDTO.getSalary());
         return employee;
+    }
+
+    public Set<EmployeeDTO> toEmployeeDTOSet(Set<Employee> employeeSet){
+        return employeeSet.stream().map(this::toEmployeeDTO).collect(Collectors.toSet());
     }
 
 }
