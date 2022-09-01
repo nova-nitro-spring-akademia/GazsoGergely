@@ -13,12 +13,12 @@
         <td><label>Last raise year</label></td>
         <td><label>Salary</label></td>
     </tr>
-    <tr th:each="e : ${employeeDTOSet}">
-        <td><label type="text" th:text="*{e.name}"></label></td>
-        <td><label type="number" th:text="*{e.birthYear}"></label></td>
-        <td><label type="number" th:text="*{e.startYear}"></label></td>
-        <td><label type="number" th:text="*{e.lastRaiseYear}"></label></td>
-        <td><label type="number" th:text="*{e.salary}"></label></td>
+    <tr th:each="instance : ${employeeListView.employeeMap}">
+        <td><label type="text" th:text="${instance.key.name}"></label><span th:if="${instance.value}"> (!)</span></td>
+        <td><label type="number" th:text="${instance.key.birthYear}"></label></td>
+        <td><label type="number" th:text="${instance.key.startYear}"></label></td>
+        <td><label type="number" th:text="${instance.key.lastRaiseYear}"></label></td>
+        <td><label type="number" th:text="${instance.key.salary}"></label></td>
     </tr>
 </table>
 </body>

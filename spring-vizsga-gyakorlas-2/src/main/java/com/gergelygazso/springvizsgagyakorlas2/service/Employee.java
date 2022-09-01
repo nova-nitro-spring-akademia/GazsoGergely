@@ -1,5 +1,7 @@
 package com.gergelygazso.springvizsgagyakorlas2.service;
 
+import java.util.Calendar;
+
 public class Employee {
 
     Long id;
@@ -62,6 +64,15 @@ public class Employee {
         this.salary = salary;
     }
 
-    
+    public boolean isLastSalaryTwoYearsAgo(){
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        return (currentYear - this.getLastRaiseYear() >= 2);
+    }
+
+    public boolean isRaiseDue(){
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        boolean isRaiseDue = currentYear - this.getLastRaiseYear() >= 5;
+        return isRaiseDue;
+    }
 
 }

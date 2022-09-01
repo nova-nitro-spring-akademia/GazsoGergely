@@ -1,6 +1,7 @@
 package com.gergelygazso.springvizsgagyakorlas2.controller.view;
 
 import com.gergelygazso.springvizsgagyakorlas2.controller.EmployeeDTO;
+import com.gergelygazso.springvizsgagyakorlas2.controller.EmployeeListView;
 import com.gergelygazso.springvizsgagyakorlas2.controller.mapper.EmployeeDTOMapper;
 import com.gergelygazso.springvizsgagyakorlas2.service.Employee;
 import com.gergelygazso.springvizsgagyakorlas2.service.EmployeeService;
@@ -32,9 +33,19 @@ public class ViewController {
 
     @GetMapping("/employeelist")
     public String showEmployeeList(Model model){
+        //raise feature előtti állapot
+//        Set<Employee> employeeSet = employeeService.findAll();
+//        Set<EmployeeDTO> employeeDTOSet = employeeDTOMapper.toEmployeeDTOSet(employeeSet);
+//        model.addAttribute("employeeDTOSet",employeeDTOSet);
+
         Set<Employee> employeeSet = employeeService.findAll();
         Set<EmployeeDTO> employeeDTOSet = employeeDTOMapper.toEmployeeDTOSet(employeeSet);
-        model.addAttribute("employeeDTOSet",employeeDTOSet);
+        EmployeeListView employeeListView = new EmployeeListView();
+        employeeDTOSet.stream().forEach(eDTO -> employeeListView.addKeyValuePair(eDTO, employeeDTOMapper.fromEmployeeDTO(eDTO).isRaiseDue()));
+        model.addAttribute("employeeListView", employeeListView);
+
+
+
         return "employee-list";
     }
 
