@@ -19,6 +19,7 @@
         <td><label type="number" th:text="${instance.key.startYear}"></label></td>
         <td><label type="number" th:text="${instance.key.lastRaiseYear}"></label></td>
         <td><label type="number" th:text="${instance.key.salary}"></label></td>
+        <td><a th:href="@{'/showassignform/' + ${instance.key.id}}">Assign and raise salary</a></td>
     </tr>
 </table>
 </body>

@@ -5,6 +5,8 @@ import com.gergelygazso.springvizsgagyakorlas2.data.DepartmentEntityRepository;
 import com.gergelygazso.springvizsgagyakorlas2.data.mapper.DepartmentEntityMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class DepartmentService {
 
@@ -20,5 +22,9 @@ public class DepartmentService {
     public Department save(Department department) {
         DepartmentEntity savedDepartmentEntity = departmentEntityRepository.save(departmentEntityMapper.toDepartmentEntity(department));
         return departmentEntityMapper.fromDepartmentEntity(savedDepartmentEntity);
+    }
+
+    public Set<Department> findAll(){
+        return departmentEntityMapper.fromDepartmentEntitySet(departmentEntityRepository.findAll());
     }
 }

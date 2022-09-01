@@ -4,6 +4,10 @@ import com.gergelygazso.springvizsgagyakorlas2.data.DepartmentEntity;
 import com.gergelygazso.springvizsgagyakorlas2.service.Department;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 public class DepartmentEntityMapper {
 
@@ -21,6 +25,10 @@ public class DepartmentEntityMapper {
         department.setName(departmentEntity.getName());
         department.setEmployees(departmentEntity.getEmployees());
         return department;
+    }
+
+    public Set<Department> fromDepartmentEntitySet(List<DepartmentEntity> departmentEntitySet){
+        return departmentEntitySet.stream().map(this::fromDepartmentEntity).collect(Collectors.toSet());
     }
 
 }
