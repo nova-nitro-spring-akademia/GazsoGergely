@@ -1,8 +1,12 @@
 package com.gergelygazso.springvizsgagyakorlas2.controller.view;
 
+import com.gergelygazso.springvizsgagyakorlas2.controller.DepartmentFormView;
 import com.gergelygazso.springvizsgagyakorlas2.controller.EmployeeDTO;
 import com.gergelygazso.springvizsgagyakorlas2.controller.EmployeeListView;
+import com.gergelygazso.springvizsgagyakorlas2.controller.mapper.DepartmentFormViewMapper;
 import com.gergelygazso.springvizsgagyakorlas2.controller.mapper.EmployeeDTOMapper;
+import com.gergelygazso.springvizsgagyakorlas2.service.Department;
+import com.gergelygazso.springvizsgagyakorlas2.service.DepartmentService;
 import com.gergelygazso.springvizsgagyakorlas2.service.Employee;
 import com.gergelygazso.springvizsgagyakorlas2.service.EmployeeService;
 import org.springframework.stereotype.Controller;
@@ -21,9 +25,15 @@ public class ViewController {
 
     EmployeeDTOMapper employeeDTOMapper;
 
-    public ViewController(EmployeeService employeeService, EmployeeDTOMapper employeeDTOMapper) {
+    DepartmentFormViewMapper departmentFormViewMapper;
+
+    DepartmentService departmentService;
+
+    public ViewController(EmployeeService employeeService, EmployeeDTOMapper employeeDTOMapper, DepartmentFormViewMapper departmentFormViewMapper, DepartmentService departmentService) {
         this.employeeService = employeeService;
         this.employeeDTOMapper = employeeDTOMapper;
+        this.departmentFormViewMapper = departmentFormViewMapper;
+        this.departmentService = departmentService;
     }
 
     @GetMapping("/")
@@ -43,9 +53,6 @@ public class ViewController {
         EmployeeListView employeeListView = new EmployeeListView();
         employeeDTOSet.stream().forEach(eDTO -> employeeListView.addKeyValuePair(eDTO, employeeDTOMapper.fromEmployeeDTO(eDTO).isRaiseDue()));
         model.addAttribute("employeeListView", employeeListView);
-
-
-
         return "employee-list";
     }
 
@@ -61,6 +68,20 @@ public class ViewController {
         Employee employee = employeeDTOMapper.fromEmployeeDTO(employeeDTO);
         employeeService.save(employee);
         return "redirect:/employeelist";
+    }
+
+    @GetMapping("/departmentform")
+    public String showDepartmentForm(Model model){
+        DepartmentFormView departmentFormView = new DepartmentFormView();
+        model.addAttribute("departmentFormView", departmentFormView);
+        return "department-form";
+    }
+
+    @PostMapping("/savedepartment")
+    public String saveDepartment(@ModelAttribute("departmentFormView") DepartmentFormView departmentFormView){
+        Department department = departmentFormViewMapper.fromDepartmentFormView(departmentFormView);
+        departmentService.save(department);
+        return "redirect:/";
     }
 
 }
