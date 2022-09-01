@@ -27,4 +27,9 @@ public class DepartmentService {
     public Set<Department> findAll(){
         return departmentEntityMapper.fromDepartmentEntitySet(departmentEntityRepository.findAll());
     }
+
+    public Department findById(Long department_id) {
+        DepartmentEntity departmentEntity = departmentEntityRepository.findById(department_id).orElseThrow();
+        return departmentEntityMapper.fromDepartmentEntity(departmentEntity);
+    }
 }

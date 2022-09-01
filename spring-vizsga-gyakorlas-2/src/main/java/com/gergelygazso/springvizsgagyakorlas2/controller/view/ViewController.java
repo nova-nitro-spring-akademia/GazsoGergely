@@ -7,16 +7,16 @@ import com.gergelygazso.springvizsgagyakorlas2.controller.EmployeeListView;
 import com.gergelygazso.springvizsgagyakorlas2.controller.mapper.DepartmentDTOMapper;
 import com.gergelygazso.springvizsgagyakorlas2.controller.mapper.DepartmentFormViewMapper;
 import com.gergelygazso.springvizsgagyakorlas2.controller.mapper.EmployeeDTOMapper;
+import com.gergelygazso.springvizsgagyakorlas2.data.EmployeeEntity;
+import com.gergelygazso.springvizsgagyakorlas2.data.mapper.DepartmentEntityMapper;
+import com.gergelygazso.springvizsgagyakorlas2.data.mapper.EmployeeEntityMapper;
 import com.gergelygazso.springvizsgagyakorlas2.service.Department;
 import com.gergelygazso.springvizsgagyakorlas2.service.DepartmentService;
 import com.gergelygazso.springvizsgagyakorlas2.service.Employee;
 import com.gergelygazso.springvizsgagyakorlas2.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Set;
@@ -28,15 +28,18 @@ public class ViewController {
 
     EmployeeDTOMapper employeeDTOMapper;
 
+    EmployeeEntityMapper employeeEntityMapper;
+
     DepartmentFormViewMapper departmentFormViewMapper;
 
     DepartmentService departmentService;
     
     DepartmentDTOMapper departmentDTOMapper;
 
-    public ViewController(EmployeeService employeeService, EmployeeDTOMapper employeeDTOMapper, DepartmentFormViewMapper departmentFormViewMapper, DepartmentService departmentService, DepartmentDTOMapper departmentDTOMapper) {
+    public ViewController(EmployeeService employeeService, EmployeeDTOMapper employeeDTOMapper, EmployeeEntityMapper employeeEntityMapper, DepartmentFormViewMapper departmentFormViewMapper, DepartmentService departmentService, DepartmentDTOMapper departmentDTOMapper) {
         this.employeeService = employeeService;
         this.employeeDTOMapper = employeeDTOMapper;
+        this.employeeEntityMapper = employeeEntityMapper;
         this.departmentFormViewMapper = departmentFormViewMapper;
         this.departmentService = departmentService;
         this.departmentDTOMapper = departmentDTOMapper;
@@ -97,11 +100,32 @@ public class ViewController {
         Employee employee = employeeService.findById(id);
         boolean hasRightForRaise = employee.isLastSalaryTwoYearsAgo();
         EmployeeDTO employeeDTO = employeeDTOMapper.toEmployeeDTO(employee);
+        Long emp_id=Long.valueOf(0);
+        Long raise=Long.valueOf(0);
+        Long dep_id=Long.valueOf(0);
 
         model.addAttribute("employeeDTO", employeeDTO);
         model.addAttribute("departmentDTOSet", departmentDTOSet);
         model.addAttribute("hasRightForRaise", hasRightForRaise);
+        model.addAttribute("emp_id", emp_id);
+        model.addAttribute("raise", raise);
+        model.addAttribute("dep_id", dep_id);
         return  "assign-form";
+    }
+
+    @PostMapping("/assignemptodep")
+    public String assignEmployeeToDepartment(
+            @ModelAttribute("employeeDTO") EmployeeDTO employeeDTO,
+            @RequestParam(value = "department_id") Long department_id
+    ){
+        Department department = departmentService.findById(department_id);
+        Employee employee = employeeService.findById(employeeDTO.getId());
+        EmployeeEntity employeeEntity = employeeEntityMapper.toEmployeeEntity(employee);
+        employeeEntity.setSalary(employeeDTO.getSalary());
+        department.assignEmployee(employeeEntity);
+
+        departmentService.save(department);
+        return "redirect:/";
     }
 
 }

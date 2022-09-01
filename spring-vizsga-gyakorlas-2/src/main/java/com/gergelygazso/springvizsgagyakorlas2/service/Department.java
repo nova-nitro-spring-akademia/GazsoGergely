@@ -5,6 +5,7 @@ import com.gergelygazso.springvizsgagyakorlas2.data.EmployeeEntity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -38,5 +39,14 @@ public class Department {
 
     public void setEmployees(Set<EmployeeEntity> employees) {
         this.employees = employees;
+    }
+
+    public void assignEmployee(EmployeeEntity employeeEntity){
+        if (employees==null){
+            employees = new HashSet<EmployeeEntity>();
+            employees.add(employeeEntity);
+        }else{
+            employees.add(employeeEntity);
+        }
     }
 }

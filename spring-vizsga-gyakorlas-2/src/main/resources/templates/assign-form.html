@@ -7,7 +7,7 @@
 <body>
 <h1>EMPLOYEE CREATE</h1>
 <br>
-<form action="#" th:action="@{/savedepartment}" method="POST">
+<form action="#" th:action="@{/assignemptodep}" method="POST">
     <table border="2">
         <tr>
             <td><label>Name</label></td>
@@ -15,8 +15,17 @@
             <td><label>Choose Department</label></td>
         </tr>
         <tr>
-            <td><input type="text" th:field="${employeeDTO.name}" th:name="emp_id"></td>
-            <td><input type="number" th:name="raise" th:if="${hasRightForRaise}"></td>
+            <td><input type="number" th:field="${employeeDTO.id}" th:text="${employeeDTO.name}"></td>
+            <td><input type="number" th:field="${employeeDTO.salary}" th:if="${hasRightForRaise}"></td>
+            <td>
+                <select th:name="department_id">
+                    <option th:each="d : ${departmentDTOSet}"
+                            th:text="${d.name}"
+                            th:name="department_id"
+                            th:value="${d.id}">
+                    </option>
+                </select>
+            </td>
             <td><button type="submit">save</button></td>
         </tr>
     </table>
